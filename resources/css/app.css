@@ -1,0 +1,181 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+@source '../**/*.vue';
+
+@theme {
+    --font-sans: 'Poppins', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --color-primary: #2563EB;
+    --color-primary-dark: #1D4ED8;
+    --color-accent: #FBBF24;
+    --color-background: #F8FAFC;
+}
+
+:root {
+    --color-bg: #F8FAFC;
+    --color-surface: #FFFFFF;
+    --color-text: #1E293B;
+    --color-muted: #64748B;
+    --color-border: #E2E8F0;
+    --admin-bg: #f3f7ff;
+}
+
+:root[data-theme="dark"] {
+    --color-bg: #070b14;
+    --color-surface: #0b1220;
+    --color-text: #e5e7eb;
+    --color-muted: #94a3b8;
+    --color-border: #1f2a44;
+    --admin-bg: #050814;
+}
+
+a,
+a:hover,
+a:focus {
+    text-decoration: none !important;
+}
+
+.bg-\[--color-bg\] { background-color: var(--color-bg);
+}
+.bg-\[--color-surface\] { background-color: var(--color-surface);
+}
+.bg-\[--admin-bg\] { background-color: var(--admin-bg);
+}
+.text-\[--color-text\] { color: var(--color-text);
+}
+.text-\[--color-muted\] { color: var(--color-muted);
+}
+.border-\[--color-border\] { border-color: var(--color-border);
+}
+.bg-\[--color-bg\]\/80 { background-color: color-mix(in oklab, var(--color-bg) 80%, transparent);
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .3s ease;
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: white;
+}
+.btn-primary:hover {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(37, 99, 235, .3);
+}
+
+.btn-accent {
+    background-color: var(--color-accent);
+    color: #1E293B;
+}
+.btn-accent:hover {
+    background-color: #F59E0B;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(251, 191, 36, .3);
+}
+
+/* Smooth Scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom Shadow */
+.custom-shadow {
+    box-shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+
+/* Border Radius 20px */
+.rounded-20px {
+    border-radius: 20px;
+}
+
+/* Sidebar responsiveness */
+#adminSidebar {
+    width: 18rem !important;
+}
+
+@media (min-width: 1024px) {
+    #adminSidebar {
+        position: sticky;
+        top: 76px !important;
+        height: calc(100vh - 76px) !important;
+        transform: none !important;
+        box-shadow: none !important;
+        overflow: hidden;
+    }
+    
+    #adminSidebar > div {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    #adminSidebar nav {
+        overflow-y: auto;
+        flex: 1;
+    }
+}
+
+/* Pagination styling */
+nav[role="navigation"] {
+    padding: 1rem;
+}
+
+nav[role="navigation"] > div:first-child {
+    display: none;
+}
+
+nav[role="navigation"] .paginator {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+nav[role="navigation"] a,
+nav[role="navigation"] span[aria-current="page"] span,
+nav[role="navigation"] span[aria-disabled="true"] span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+nav[role="navigation"] a {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+}
+
+nav[role="navigation"] a:hover {
+    background-color: color-mix(in oklab, var(--color-primary) 10%, var(--color-bg));
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+nav[role="navigation"] span[aria-current="page"] span {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+}
+
+nav[role="navigation"] span[aria-disabled="true"] span {
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    color: var(--color-muted);
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
