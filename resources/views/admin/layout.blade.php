@@ -15,7 +15,7 @@
 </head>
 <body class="min-h-screen bg-[--admin-bg] text-[--color-text] antialiased overflow-x-hidden">
     @php
-        $adminLogo = asset('IMG_1972.PNG');
+        $adminLogo = asset('logo.PNG');
         $adminNavItems = [
             ['label' => 'Dashboard', 'route' => 'admin.dashboard', 'patterns' => ['admin.dashboard'], 'icon' => 'bi-speedometer2'],
             ['label' => 'Kategori Wisata', 'route' => 'admin.destination-categories.index', 'patterns' => ['admin.destination-categories.*'], 'icon' => 'bi-tags'],
@@ -45,8 +45,8 @@
                         <svg viewBox="0 0 24 24" fill="none" class="h-5 w-5" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>
                     </button>
                 @endauth
-                <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2">
-                    <div class="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 bg-primary/10 p-1 shadow-sm">
+                <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2.5">
+                    <div class="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-primary/10 p-1 shadow-sm">
                         <img src="{{ $adminLogo }}" alt="Logo" class="h-full w-full object-contain">
                     </div>
                     <div class="hidden sm:flex flex-col leading-tight">
@@ -92,8 +92,8 @@
                 <div class="flex h-full flex-col">
                     <!-- Mobile Sidebar Header -->
                     <div class="flex items-center justify-between border-b border-slate-200 p-4 lg:hidden">
-                        <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2">
-                            <div class="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 bg-primary/10 p-1 shadow-sm">
+                        <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2.5">
+                            <div class="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-primary/10 p-1 shadow-sm">
                                 <img src="{{ $adminLogo }}" alt="Logo" class="h-full w-full object-contain">
                             </div>
                             <div class="flex flex-col leading-tight">
@@ -108,7 +108,7 @@
                     
                     <!-- Desktop Sidebar Info -->
                     <div class="border-b border-slate-200 p-4 hidden lg:flex items-center gap-3">
-                        <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary/80 p-1.5 shadow-md">
+                        <div class="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary/80 p-2 shadow-md">
                             <img src="{{ $adminLogo }}" alt="Logo" class="h-full w-full object-contain">
                         </div>
                         <div class="flex flex-col">

@@ -14,8 +14,8 @@
 </head>
 <body class="min-h-screen bg-[--color-bg] text-[--color-text] antialiased">
     @php
-        $primaryLogo = asset('IMG_1972.PNG');
-        $secondaryLogo = asset('logo.PNG');
+        $primaryLogo = asset('logo.PNG');
+        $footerLogo = asset('IMG_1972.PNG');
         $navItems = [
             ['label' => 'Beranda', 'route' => 'home', 'patterns' => ['home'], 'icon' => 'bi-house-fill'],
             ['label' => 'Destinasi', 'route' => 'destinations.index', 'patterns' => ['destinations.*'], 'icon' => 'bi-geo-alt-fill'],
@@ -31,13 +31,13 @@
             <!-- Navbar Container -->
             <div class="flex items-center justify-between rounded-2xl bg-gradient-to-r from-primary to-primary-dark px-3.5 py-2.5 shadow-lg">
                 <!-- Logo Section -->
-                <a href="{{ route('home') }}" class="flex items-center gap-2">
-                    <div class="flex h-9 w-9 items-center justify-center rounded-full bg-white p-0.5 shadow-md">
+                <a href="{{ route('home') }}" class="flex items-center gap-2.5 min-w-0">
+                    <div class="flex h-11 w-11 items-center justify-center rounded-full bg-white p-1 shadow-md">
                         <img src="{{ $primaryLogo }}" alt="Logo Kabupaten Cilacap" class="h-full w-full object-contain">
                     </div>
-                    <div class="leading-tight hidden sm:block">
-                        <div class="text-[11px] font-bold tracking-tight text-white">{{ $settings->site_name ?? 'Wisata Cilacap' }}</div>
-                        <div class="text-[8px] font-medium text-white/80">Kabupaten Cilacap</div>
+                    <div class="min-w-0 leading-tight">
+                        <div class="truncate text-[10px] font-bold tracking-tight text-white sm:text-[11px]">{{ $settings->site_name ?? 'Wisata Cilacap' }}</div>
+                        <div class="truncate text-[8px] font-medium text-white/80">Kabupaten Cilacap</div>
                     </div>
                 </a>
 
@@ -71,24 +71,24 @@
 
     <!-- Mobile Sidebar -->
     <div id="mobileOverlay" class="fixed inset-0 z-50 hidden bg-black/50 backdrop-blur-sm transition-opacity md:hidden"></div>
-    <aside id="mobileSidebar" class="fixed left-0 top-0 z-50 h-full w-[85%] max-w-sm -translate-x-full transform bg-white shadow-2xl transition-transform duration-300 md:hidden">
-        <div class="flex items-center justify-between border-b border-gray-100 p-3.5 bg-gradient-to-r from-primary to-primary-dark">
-            <a href="{{ route('home') }}" class="flex items-center gap-2.5">
-                <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-white p-0.5 shadow-md">
+    <aside id="mobileSidebar" class="mobile-sidebar fixed left-0 top-0 z-50 h-full w-[88%] max-w-[340px] -translate-x-full transform bg-white shadow-2xl transition-transform duration-300 md:hidden">
+        <div class="mobile-sidebar__header flex items-center justify-between border-b border-gray-100 p-3.5 bg-gradient-to-r from-primary to-primary-dark">
+            <a href="{{ route('home') }}" class="mobile-brand flex min-w-0 items-center gap-2.5">
+                <div class="mobile-brand__logo flex h-11 w-11 items-center justify-center rounded-xl bg-white p-1 shadow-md">
                     <img src="{{ $primaryLogo }}" alt="Logo Kabupaten Cilacap" class="h-full w-full object-contain">
                 </div>
-                <div class="leading-tight">
-                    <div class="text-sm font-bold text-white">{{ $settings->site_name ?? 'Wisata Cilacap' }}</div>
-                    <div class="text-[9px] font-medium text-white/80">Kabupaten Cilacap</div>
+                <div class="mobile-brand__text min-w-0 leading-tight">
+                    <div class="mobile-brand__title text-sm font-bold text-white">{{ $settings->site_name ?? 'Wisata Cilacap' }}</div>
+                    <div class="mobile-brand__subtitle text-[9px] font-medium text-white/80">Kabupaten Cilacap</div>
                 </div>
             </a>
-            <button id="closeMobileMenu" class="flex h-8 w-8 items-center justify-center rounded-full bg-white/20 text-white transition-all duration-300 hover:bg-white/30">
+            <button id="closeMobileMenu" class="mobile-sidebar__close flex h-8 w-8 items-center justify-center rounded-full bg-white/20 text-white transition-all duration-300 hover:bg-white/30">
                 <i class="bi-x-lg text-base"></i>
             </button>
         </div>
-        <nav class="p-3.5">
+        <nav class="mobile-sidebar__content p-3.5">
             <!-- Mobile Search -->
-            <div class="mb-4 flex items-center gap-2 rounded-xl bg-gray-100 px-3.5 py-2 border border-gray-200">
+            <div class="mobile-search mb-4 flex items-center gap-2 rounded-xl bg-gray-100 px-3.5 py-2 border border-gray-200">
                 <i class="bi-search text-primary text-sm"></i>
                 <input type="text" placeholder="Cari destinasi, kuliner..." class="w-full bg-transparent border-none text-sm text-gray-700 focus:ring-0 focus:outline-none">
             </div>
@@ -97,7 +97,7 @@
             <div class="grid gap-2">
                 @foreach($navItems as $item)
                     @php($isActive = request()->routeIs(...$item['patterns']))
-                    <a href="{{ route($item['route']) }}" class="nav-link {{ $isActive ? 'border-primary bg-gradient-to-r from-primary/15 to-primary-dark/15 text-primary' : 'border-gray-200 bg-gray-50 text-gray-700 hover:bg-primary/5 hover:text-primary' }} flex items-center gap-2 rounded-xl border px-3.5 py-2.5 text-[13px] font-semibold transition-all duration-300">
+                    <a href="{{ route($item['route']) }}" class="nav-link mobile-nav-link {{ $isActive ? 'border-primary bg-gradient-to-r from-primary/15 to-primary-dark/15 text-primary' : 'border-gray-200 bg-gray-50 text-gray-700 hover:bg-primary/5 hover:text-primary' }} flex items-center gap-2 rounded-xl border px-3.5 py-2.5 text-[13px] font-semibold transition-all duration-300">
                         <i class="{{ $item['icon'] }} text-sm"></i>
                         {{ $item['label'] }}
                     </a>
@@ -115,8 +115,8 @@
             <div class="grid gap-6 lg:grid-cols-3">
                 <div class="rounded-2xl border border-gray-100 bg-[#F8FAFC] p-6 custom-shadow">
                     <div class="flex items-center gap-3 mb-4">
-                        <div class="flex h-12 w-12 items-center justify-center rounded-full bg-primary p-1">
-                            <img src="{{ $secondaryLogo }}" alt="Paguyuban Mas Mbak Cilacap" class="h-9 w-9 object-contain">
+                        <div class="flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 p-1.5">
+                            <img src="{{ $footerLogo }}" alt="Foto Footer Cilacap" class="h-full w-full rounded-full object-cover">
                         </div>
                         <div class="leading-tight">
                             <div class="text-sm font-bold text-dark">{{ $settings->site_name ?? 'Wisata Cilacap' }}</div>

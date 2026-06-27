@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Testimonial;
+use App\Models\WebsiteSetting;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -16,6 +17,7 @@ class TestimonialController extends Controller
             ->paginate(12);
 
         return view('frontend.testimonials.index', [
+            'settings' => WebsiteSetting::current(),
             'testimonials' => $testimonials,
         ]);
     }
