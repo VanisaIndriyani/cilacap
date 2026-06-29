@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -71,5 +72,27 @@ class Destination extends Model
     public function category()
     {
         return $this->belongsTo(DestinationCategory::class, 'destination_category_id');
+    }
+
+    protected function mapsEmbedUrl(): Attribute
+    {
+        return Attribute::get(function () {
+            $mapsUrl = trim((string) $this->maps_url);
+            $address = trim((string) $this->address);
+
+            if ($mapsUrl !== '' && (Str::contains($mapsUrl, '/maps/embed') || Str::contains($mapsUrl, 'output=embed'))) {
+                return $mapsUrl;
+            }
+
+            if ($address !== '') {
+                return 'https://www.google.com/maps?q='.urlencode($address).'&output=embed';
+            }
+
+            if ($mapsUrl !== '') {
+                return 'https://www.google.com/maps?q='.urlencode($mapsUrl).'&output=embed';
+            }
+
+            return null;
+        });
     }
 }

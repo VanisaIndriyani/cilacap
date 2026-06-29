@@ -82,8 +82,9 @@
                     <textarea name="ingredients_text" rows="3" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all">{{ old('ingredients_text', $ing) }}</textarea>
                 </div>
                 <div class="sm:col-span-1">
-                    <label class="text-sm font-semibold text-slate-700 mb-2 block">Google Maps URL (Embed)</label>
+                    <label class="text-sm font-semibold text-slate-700 mb-2 block">Google Maps URL</label>
                     <textarea name="maps_url" rows="3" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all">{{ old('maps_url', $culinary->maps_url) }}</textarea>
+                    <div class="mt-2 text-xs text-slate-500">Boleh isi link share Google Maps biasa. Sistem akan otomatis menampilkan preview peta.</div>
                 </div>
                 <div class="sm:col-span-1">
                     <label class="text-sm font-semibold text-slate-700 mb-2 block">Tambah Foto (Multi Upload)</label>

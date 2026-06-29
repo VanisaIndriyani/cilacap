@@ -4,6 +4,7 @@
 
 @section('content')
     @php($images = is_array($culinary->images) ? $culinary->images : [])
+    @php($mapsEmbedUrl = $culinary->maps_embed_url)
     <section class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
             <div>
@@ -115,10 +116,12 @@
                             <div class="text-sm text-[--color-muted]">{{ $culinary->address }}</div>
                         </div>
                     @endif
-                    @if($culinary->maps_url)
+                    @if($mapsEmbedUrl)
                         <div class="mt-4 overflow-hidden rounded-2xl border border-primary/10 bg-[--color-bg] shadow-inner">
-                            <iframe src="{{ $culinary->maps_url }}" class="h-64 w-full" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            <iframe src="{{ $mapsEmbedUrl }}" class="h-64 w-full" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
+                    @endif
+                    @if($culinary->maps_url)
                         <a href="{{ $culinary->maps_url }}" target="_blank" rel="noopener" class="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-primary px-6 py-3 text-base font-bold text-white shadow-lg shadow-primary/30 transition hover:bg-primary/90 hover:-translate-y-1">
                             <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
