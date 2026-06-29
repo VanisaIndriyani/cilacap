@@ -6,11 +6,11 @@
     <section class="mx-auto max-w-7xl px-3 sm:px-4 py-10 lg:py-12 lg:px-8">
         <div>
             <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">Tempat Penginapan</h1>
-            <p class="mt-2 text-sm sm:text-base text-gray-600">Filter berdasarkan lokasi, kategori, dan rentang harga.</p>
+            <p class="mt-2 text-sm sm:text-base text-gray-600">Filter berdasarkan lokasi dan kategori penginapan.</p>
         </div>
 
         <div class="mt-6 rounded-xl border border-gray-200 bg-white p-3 sm:p-4 shadow-sm">
-            <form method="GET" class="grid gap-2 sm:grid-cols-2 lg:grid-cols-7 items-end">
+            <form method="GET" class="grid gap-2 sm:grid-cols-2 lg:grid-cols-5 items-end">
                 <div class="sm:col-span-2 lg:col-span-2">
                     <label class="text-xs font-semibold text-gray-600">Cari</label>
                     <div class="mt-1 relative">
@@ -35,14 +35,6 @@
                             <option value="{{ $key }}" @selected($filters['category'] === $key)>{{ $label }}</option>
                         @endforeach
                     </select>
-                </div>
-                <div>
-                    <label class="text-xs font-semibold text-gray-600">Min Harga</label>
-                    <input name="min_price" value="{{ $filters['min_price'] }}" inputmode="numeric" placeholder="0" class="mt-1 w-full rounded-lg border border-gray-200 bg-gray-50 px-3 py-2.5 text-sm transition focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none">
-                </div>
-                <div>
-                    <label class="text-xs font-semibold text-gray-600">Max Harga</label>
-                    <input name="max_price" value="{{ $filters['max_price'] }}" inputmode="numeric" placeholder="1000000" class="mt-1 w-full rounded-lg border border-gray-200 bg-gray-50 px-3 py-2.5 text-sm transition focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none">
                 </div>
                 <div class="flex gap-2 sm:justify-end">
                     <a href="{{ route('accommodations.index') }}" class="inline-flex items-center justify-center rounded-lg border border-gray-200 bg-white px-4 py-2.5 text-xs font-semibold text-gray-700 transition hover:bg-gray-50">
@@ -88,8 +80,8 @@
                                     @endif
                                 </div>
                             </div>
-                            @if($item->price_per_night !== null)
-                                <div class="rounded-2xl bg-accent/20 px-4 py-2 text-sm font-bold text-accent">Rp {{ number_format((float) $item->price_per_night) }}</div>
+                            @if($item->purchase_link)
+                                <div class="rounded-2xl bg-accent/20 px-4 py-2 text-sm font-bold text-accent">Link Pembelian</div>
                             @endif
                         </div>
                         <div class="mt-4 line-clamp-2 text-base text-[--color-muted]">{{ $item->address }}</div>

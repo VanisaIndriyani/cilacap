@@ -18,6 +18,7 @@ class Accommodation extends Model
         'slug',
         'location_zone',
         'address',
+        'purchase_link',
         'price_per_night',
         'facilities',
         'maps_url',

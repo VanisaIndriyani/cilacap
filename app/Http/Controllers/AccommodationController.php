@@ -15,8 +15,6 @@ class AccommodationController extends Controller
         $q = trim((string) $request->query('q', ''));
         $zone = trim((string) $request->query('zone', ''));
         $category = trim((string) $request->query('category', ''));
-        $minPrice = $request->query('min_price');
-        $maxPrice = $request->query('max_price');
 
         $query = Accommodation::query()
             ->where('is_published', true)
@@ -37,14 +35,6 @@ class AccommodationController extends Controller
             $query->where('category', $category);
         }
 
-        if (is_numeric($minPrice)) {
-            $query->where('price_per_night', '>=', (float) $minPrice);
-        }
-
-        if (is_numeric($maxPrice)) {
-            $query->where('price_per_night', '<=', (float) $maxPrice);
-        }
-
         return view('frontend.accommodations.index', [
             'settings' => $settings,
             'accommodations' => $query->paginate(9)->withQueryString(),
@@ -54,8 +44,6 @@ class AccommodationController extends Controller
                 'q' => $q,
                 'zone' => $zone,
                 'category' => $category,
-                'min_price' => $minPrice,
-                'max_price' => $maxPrice,
             ],
         ]);
     }

@@ -117,7 +117,7 @@ class AccommodationController extends Controller
             'slug' => ['nullable', 'string', 'max:255', 'unique:accommodations,slug,'.((string) $id)],
             'location_zone' => ['nullable', 'string', 'max:50'],
             'address' => ['nullable', 'string'],
-            'price_per_night' => ['nullable', 'numeric', 'min:0'],
+            'purchase_link' => ['nullable', 'url', 'max:2048'],
             'maps_url' => ['nullable', 'string'],
             'is_popular' => ['nullable', 'boolean'],
             'is_published' => ['nullable', 'boolean'],
@@ -132,4 +132,3 @@ class AccommodationController extends Controller
         return $data;
     }
 }
-

@@ -20,8 +20,8 @@
                     @if($accommodation->location_zone)
                         <span class="rounded-full bg-accent/10 px-4 py-1.5 font-semibold text-accent">{{ config('cilacap.location_zones')[$accommodation->location_zone] ?? $accommodation->location_zone }}</span>
                     @endif
-                    @if($accommodation->price_per_night !== null)
-                        <span class="rounded-full bg-primary px-4 py-1.5 font-bold text-white">Mulai Rp {{ number_format((float) $accommodation->price_per_night) }}/malam</span>
+                    @if($accommodation->purchase_link)
+                        <span class="rounded-full bg-primary px-4 py-1.5 font-bold text-white">Link Pembelian Tersedia</span>
                     @endif
                 </div>
             </div>
@@ -66,6 +66,19 @@
             </div>
 
             <aside class="space-y-6">
+                <div class="rounded-3xl border border-primary/10 bg-[--color-surface] p-7 shadow-xl">
+                    <div class="text-xl font-bold text-[--color-text]">Link Pembelian</div>
+                    @if($accommodation->purchase_link)
+                        <div class="mt-3 text-sm leading-relaxed text-[--color-muted]">Pesan penginapan ini langsung melalui platform pembelian yang sudah disediakan.</div>
+                        <a href="{{ $accommodation->purchase_link }}" target="_blank" rel="noopener noreferrer" class="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-accent px-6 py-3 text-base font-bold text-slate-900 shadow-lg shadow-accent/30 transition hover:bg-accent/90 hover:-translate-y-1">
+                            <i class="bi-bag-check-fill"></i>
+                            Buka Link Pembelian
+                        </a>
+                    @else
+                        <div class="mt-3 text-sm text-[--color-muted]">Link pembelian belum tersedia untuk penginapan ini.</div>
+                    @endif
+                </div>
+
                 <div class="rounded-3xl border border-accent/10 bg-[--color-surface] p-7 shadow-xl">
                     <div class="flex items-center gap-3 mb-5">
                         <div class="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10">

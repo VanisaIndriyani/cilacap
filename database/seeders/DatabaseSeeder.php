@@ -292,6 +292,7 @@ class DatabaseSeeder extends Seeder
                 'category' => 'hotel',
                 'location_zone' => 'cilacap-kota',
                 'address' => 'Cilacap Kota',
+                'purchase_link' => 'https://www.agoda.com/',
                 'price_per_night' => 650000,
                 'facilities' => ['WiFi', 'Sarapan', 'Parkir'],
                 'is_popular' => true,

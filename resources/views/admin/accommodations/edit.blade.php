@@ -50,8 +50,9 @@
                     <textarea name="address" rows="3" class="mt-2 w-full rounded-2xl border border-[--color-border] bg-[--color-bg] px-4 py-3 text-sm">{{ old('address', $accommodation->address) }}</textarea>
                 </div>
                 <div>
-                    <label class="text-sm font-semibold">Harga / malam</label>
-                    <input name="price_per_night" value="{{ old('price_per_night', $accommodation->price_per_night) }}" inputmode="decimal" class="mt-2 w-full rounded-2xl border border-[--color-border] bg-[--color-bg] px-4 py-3 text-sm">
+                    <label class="text-sm font-semibold">Link Pembelian</label>
+                    <input name="purchase_link" type="url" value="{{ old('purchase_link', $accommodation->purchase_link) }}" placeholder="https://www.agoda.com/..." class="mt-2 w-full rounded-2xl border border-[--color-border] bg-[--color-bg] px-4 py-3 text-sm">
+                    <div class="mt-2 text-xs text-[--color-muted]">Isi dengan tautan langsung ke halaman pemesanan, misalnya Agoda, Traveloka, atau platform lainnya.</div>
                 </div>
                 <div>
                     <label class="text-sm font-semibold">Google Maps URL (Embed)</label>
@@ -116,4 +117,3 @@
         </div>
     </form>
 @endsection
-
