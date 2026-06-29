@@ -51,8 +51,9 @@
                     <div class="mt-2 text-xs text-[--color-muted]">Isi dengan tautan langsung ke halaman pemesanan, misalnya Agoda, Traveloka, atau platform lainnya.</div>
                 </div>
                 <div>
-                    <label class="text-sm font-semibold">Google Maps URL (Embed)</label>
+                    <label class="text-sm font-semibold">Google Maps URL</label>
                     <textarea name="maps_url" rows="3" class="mt-2 w-full rounded-2xl border border-[--color-border] bg-[--color-bg] px-4 py-3 text-sm">{{ old('maps_url') }}</textarea>
+                    <div class="mt-2 text-xs text-[--color-muted]">Boleh isi link share Google Maps biasa. Sistem akan otomatis menampilkan preview peta.</div>
                 </div>
                 <div class="lg:col-span-2">
                     <label class="text-sm font-semibold">Fasilitas (pisahkan dengan koma / baris baru)</label>
