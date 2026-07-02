@@ -59,11 +59,6 @@
                     <textarea name="maps_url" rows="3" class="mt-2 w-full rounded-2xl border border-[--color-border] bg-[--color-bg] px-4 py-3 text-sm">{{ old('maps_url', $accommodation->maps_url) }}</textarea>
                     <div class="mt-2 text-xs text-[--color-muted]">Boleh isi link share Google Maps biasa. Sistem akan otomatis menampilkan preview peta.</div>
                 </div>
-                <div class="lg:col-span-2">
-                    <label class="text-sm font-semibold">Fasilitas (pisahkan dengan koma / baris baru)</label>
-                    @php($fac = is_array($accommodation->facilities) ? implode("\n", $accommodation->facilities) : '')
-                    <textarea name="facilities_text" rows="3" class="mt-2 w-full rounded-2xl border border-[--color-border] bg-[--color-bg] px-4 py-3 text-sm">{{ old('facilities_text', $fac) }}</textarea>
-                </div>
                 <div>
                     <label class="text-sm font-semibold">Tambah Foto (Multi Upload)</label>
                     <input type="file" name="images[]" multiple accept="image/*" class="mt-2 w-full rounded-2xl border border-[--color-border] bg-[--color-bg] px-4 py-3 text-sm">

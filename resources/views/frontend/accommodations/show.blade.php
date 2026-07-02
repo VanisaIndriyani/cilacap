@@ -80,25 +80,6 @@
                     @endif
                 </div>
 
-                <div class="rounded-3xl border border-accent/10 bg-[--color-surface] p-7 shadow-xl">
-                    <div class="flex items-center gap-3 mb-5">
-                        <div class="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10">
-                            <svg class="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                            </svg>
-                        </div>
-                        <div class="text-xl font-bold text-[--color-text]">Fasilitas</div>
-                    </div>
-                    @php($facilities = is_array($accommodation->facilities) ? $accommodation->facilities : [])
-                    <div class="mt-3 flex flex-wrap gap-2">
-                        @forelse($facilities as $f)
-                            <span class="rounded-full bg-accent/10 px-4 py-2 text-sm font-semibold text-accent">{{ $f }}</span>
-                        @empty
-                            <div class="text-sm text-[--color-muted]">Belum ada data fasilitas.</div>
-                        @endforelse
-                    </div>
-                </div>
-
                 <div class="rounded-3xl border border-primary/10 bg-[--color-surface] p-7 shadow-xl">
                     <div class="flex items-center gap-3 mb-5">
                         <div class="flex h-10 w-10 items-center justify-center rounded-2xl bg-accent/10">

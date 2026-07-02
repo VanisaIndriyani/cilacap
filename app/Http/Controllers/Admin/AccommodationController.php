@@ -59,7 +59,6 @@ class AccommodationController extends Controller
         $data = $this->validated($request);
 
         $data['images'] = Uploads::storeMany((array) $request->file('images', []), 'accommodations');
-        $data['facilities'] = Uploads::normalizeStringList($request->input('facilities_text'));
 
         Accommodation::query()->create($data);
 
@@ -90,7 +89,6 @@ class AccommodationController extends Controller
 
         $newImages = Uploads::storeMany((array) $request->file('images', []), 'accommodations');
         $data['images'] = array_values(array_merge($existingImages, $newImages));
-        $data['facilities'] = Uploads::normalizeStringList($request->input('facilities_text'));
 
         $accommodation->update($data);
 
