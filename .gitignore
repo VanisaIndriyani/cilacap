@@ -3,6 +3,7 @@
 /public/build
 /public/hot
 /public/storage
+/public/build.zip
 /storage/*.key
 /storage/logs/*.log
 /storage/framework/cache/data/*

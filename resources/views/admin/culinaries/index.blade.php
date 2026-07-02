@@ -2,12 +2,14 @@
 @extends('admin.layout', ['title' => $title])
 
 @section('content')
+    @php($type = $filters['type'] ?? '')
+    @php($typeLabel = $culinaryTypes[$type] ?? 'Kuliner')
     <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between mb-6">
         <div>
-            <h1 class="text-2xl font-bold tracking-tight">Kuliner</h1>
-            <div class="mt-2 text-sm text-slate-500">Kelola semua kuliner khas Cilacap: foto, deskripsi, lokasi, dan harga.</div>
+            <h1 class="text-2xl font-bold tracking-tight">{{ $typeLabel }}</h1>
+            <div class="mt-2 text-sm text-slate-500">Kelola data kuliner: foto, deskripsi, lokasi, dan tipe.</div>
         </div>
-        <a href="{{ route('admin.culinaries.create') }}" class="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-bold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-xl">
+        <a href="{{ route('admin.culinaries.create', array_filter(['type' => $type])) }}" class="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-bold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-xl">
             <i class="bi-plus-lg"></i>
             Tambah Kuliner
         </a>
@@ -22,6 +24,14 @@
                 </div>
             </div>
             <div>
+                <select name="type" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none">
+                    <option value="">Semua Tipe</option>
+                    @foreach($culinaryTypes as $key => $label)
+                        <option value="{{ $key }}" @selected(($filters['type'] ?? '') === $key)>{{ $label }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div>
                 <select name="published" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none">
                     <option value="">Semua Status</option>
                     <option value="1" @selected($filters['published'] === '1')>Published</option>
@@ -34,7 +44,7 @@
                     Menampilkan {{ $culinaries->total() }} data
                 </div>
                 <div class="flex gap-2">
-                    <a href="{{ route('admin.culinaries.index') }}" class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm font-semibold transition hover:border-primary hover:bg-primary/5">
+                    <a href="{{ route('admin.culinaries.index', array_filter(['type' => $filters['type'] ?? null])) }}" class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm font-semibold transition hover:border-primary hover:bg-primary/5">
                         <i class="bi-arrow-counterclockwise"></i>
                         Reset
                     </a>
@@ -87,6 +97,12 @@
                             <td class="px-5 py-4">
                                 <div class="font-bold text-slate-800">{{ $c->name }}</div>
                                 <div class="mt-1 text-xs text-slate-500">{{ $c->slug }}</div>
+                                @php($rowType = $c->type ?? '')
+                                @if($rowType !== '')
+                                    <div class="mt-2">
+                                        <span class="inline-flex items-center rounded-full bg-slate-100 px-2.5 py-1 text-[10px] font-bold text-slate-700">{{ $culinaryTypes[$rowType] ?? $rowType }}</span>
+                                    </div>
+                                @endif
                             </td>
                             <td class="px-5 py-4">
                                 <div class="flex flex-wrap gap-2">
@@ -112,7 +128,7 @@
                             <td class="px-5 py-4 text-sm text-slate-500">{{ $c->updated_at?->format('d/m/Y H:i') ?? '-' }}</td>
                             <td class="px-5 py-4">
                                 <div class="flex items-center justify-end gap-2">
-                                    <a href="{{ route('admin.culinaries.edit', $c->id) }}" class="inline-flex items-center gap-1 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-bold transition hover:border-primary hover:bg-primary/10 hover:text-primary">
+                                    <a href="{{ route('admin.culinaries.edit', array_filter(['culinary' => $c->id, 'type' => $filters['type'] ?? null])) }}" class="inline-flex items-center gap-1 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-bold transition hover:border-primary hover:bg-primary/10 hover:text-primary">
                                         <i class="bi-pencil"></i>
                                         Edit
                                     </a>

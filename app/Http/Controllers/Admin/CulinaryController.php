@@ -10,12 +10,27 @@ use Illuminate\View\View;
 
 class CulinaryController extends Controller
 {
+    private function culinaryTypes(): array
+    {
+        return [
+            'khas' => 'Kuliner Khas',
+            'cafe' => 'Kuliner & Caffe',
+        ];
+    }
+
     public function index(Request $request): View
     {
         $q = trim((string) $request->query('q', ''));
+        $type = trim((string) $request->query('type', ''));
         $published = $request->query('published', '');
 
+        $types = $this->culinaryTypes();
+        if (! array_key_exists($type, $types)) {
+            $type = '';
+        }
+
         $culinaries = Culinary::query()
+            ->when($type !== '', fn ($query) => $query->where('type', $type))
             ->when($q !== '', function ($query) use ($q) {
                 $query->where('name', 'like', '%'.$q.'%')
                     ->orWhere('slug', 'like', '%'.$q.'%')
@@ -31,8 +46,10 @@ class CulinaryController extends Controller
 
         return view('admin.culinaries.index', [
             'culinaries' => $culinaries,
+            'culinaryTypes' => $types,
             'filters' => [
                 'q' => $q,
+                'type' => $type,
                 'published' => (string) $published,
             ],
         ]);
@@ -43,6 +60,7 @@ class CulinaryController extends Controller
         return view('admin.culinaries.create', [
             'culinary' => new Culinary(),
             'locationZones' => config('cilacap.location_zones'),
+            'culinaryTypes' => $this->culinaryTypes(),
         ]);
     }
 
@@ -55,7 +73,7 @@ class CulinaryController extends Controller
 
         Culinary::query()->create($data);
 
-        return redirect()->route('admin.culinaries.index');
+        return redirect()->route('admin.culinaries.index', ['type' => $data['type']]);
     }
 
     public function edit(Culinary $culinary): View
@@ -63,6 +81,7 @@ class CulinaryController extends Controller
         return view('admin.culinaries.edit', [
             'culinary' => $culinary,
             'locationZones' => config('cilacap.location_zones'),
+            'culinaryTypes' => $this->culinaryTypes(),
         ]);
     }
 
@@ -85,7 +104,7 @@ class CulinaryController extends Controller
 
         $culinary->update($data);
 
-        return redirect()->route('admin.culinaries.index');
+        return redirect()->route('admin.culinaries.index', ['type' => $data['type']]);
     }
 
     public function destroy(Culinary $culinary)
@@ -105,6 +124,7 @@ class CulinaryController extends Controller
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'slug' => ['nullable', 'string', 'max:255', 'unique:culinaries,slug,'.((string) $id)],
+            'type' => ['required', 'in:khas,cafe'],
             'short_description' => ['nullable', 'string'],
             'history' => ['nullable', 'string'],
             'description' => ['nullable', 'string'],
@@ -124,4 +144,3 @@ class CulinaryController extends Controller
         return $data;
     }
 }
-

@@ -37,6 +37,7 @@ class CulinaryController extends Controller
 
         $query = Culinary::query()
             ->where('is_published', true)
+            ->where('type', $mode)
             ->latest('published_at');
 
         if ($q !== '') {

@@ -20,7 +20,8 @@
             ['label' => 'Dashboard', 'route' => 'admin.dashboard', 'patterns' => ['admin.dashboard'], 'icon' => 'bi-speedometer2'],
             ['label' => 'Kategori Wisata', 'route' => 'admin.destination-categories.index', 'patterns' => ['admin.destination-categories.*'], 'icon' => 'bi-tags'],
             ['label' => 'Wisata', 'route' => 'admin.destinations.index', 'patterns' => ['admin.destinations.*'], 'icon' => 'bi-geo-alt'],
-            ['label' => 'Kuliner', 'route' => 'admin.culinaries.index', 'patterns' => ['admin.culinaries.*'], 'icon' => 'bi-egg-fried'],
+            ['label' => 'Kuliner Khas', 'route' => 'admin.culinaries.index', 'params' => ['type' => 'khas'], 'patterns' => ['admin.culinaries.*'], 'icon' => 'bi-egg-fried', 'active_query' => ['type' => 'khas']],
+            ['label' => 'Kuliner & Caffe', 'route' => 'admin.culinaries.index', 'params' => ['type' => 'cafe'], 'patterns' => ['admin.culinaries.*'], 'icon' => 'bi-cup-hot', 'active_query' => ['type' => 'cafe']],
             ['label' => 'Penginapan', 'route' => 'admin.accommodations.index', 'patterns' => ['admin.accommodations.*'], 'icon' => 'bi-house'],
             ['label' => 'Budaya', 'route' => 'admin.cultures.index', 'patterns' => ['admin.cultures.*'], 'icon' => 'bi-music-note-beamed'],
             ['label' => 'Testimoni', 'route' => 'admin.testimonials.index', 'patterns' => ['admin.testimonials.*'], 'icon' => 'bi-chat-square-heart'],
@@ -125,7 +126,16 @@
                         <div class="space-y-1.5">
                             @foreach($adminNavItems as $item)
                                 @php($isActive = request()->routeIs(...$item['patterns']))
-                                <a href="{{ route($item['route']) }}" class="group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold transition-all duration-200 {{ $isActive ? 'bg-primary text-white shadow-sm shadow-primary/20' : 'text-slate-700 hover:bg-primary/10 hover:text-primary' }}">
+                                @php($activeQuery = $item['active_query'] ?? [])
+                                @php($typeFromQuery = (string) request()->query('type', ''))
+                                @php($routeCulinary = request()->route('culinary'))
+                                @php($typeFromRoute = is_object($routeCulinary) ? (string) ($routeCulinary->type ?? '') : '')
+                                @php($typeRequirement = (string) ($activeQuery['type'] ?? ''))
+                                @php($typeOk = $typeRequirement === '' ? true : ($typeFromQuery !== '' ? $typeFromQuery === $typeRequirement : ($typeFromRoute !== '' && $typeFromRoute === $typeRequirement)))
+                                @php($activeQuery = collect($activeQuery)->except(['type'])->all())
+                                @php($isActive = $isActive && $typeOk && collect($activeQuery)->every(fn ($v, $k) => (string) request()->query($k, '') === (string) $v))
+                                @php($params = $item['params'] ?? [])
+                                <a href="{{ route($item['route'], $params) }}" class="group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold transition-all duration-200 {{ $isActive ? 'bg-primary text-white shadow-sm shadow-primary/20' : 'text-slate-700 hover:bg-primary/10 hover:text-primary' }}">
                                     <i class="{{ $item['icon'] }} text-lg"></i>
                                     {{ $item['label'] }}
                                 </a>

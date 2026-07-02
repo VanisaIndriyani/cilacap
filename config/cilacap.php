@@ -6,6 +6,7 @@ return [
         'cilacap-timur' => 'Cilacap Timur',
         'cilacap-barat' => 'Cilacap Barat',
         'cilacap-tengah' => 'Cilacap Tengah',
+        'cilacap-utara' => 'Cilacap Utara',
     ],
 
     'budgets' => [
@@ -38,4 +39,3 @@ return [
         'sejarah-budaya' => 'Sejarah Budaya',
     ],
 ];
-

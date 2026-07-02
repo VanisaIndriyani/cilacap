@@ -18,6 +18,7 @@ class Culinary extends Model
     protected $fillable = [
         'name',
         'slug',
+        'type',
         'short_description',
         'history',
         'description',

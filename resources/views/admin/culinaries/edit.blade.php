@@ -2,6 +2,7 @@
 @extends('admin.layout', ['title' => $title])
 
 @section('content')
+    @php($backType = old('type', $culinary->type ?? null))
     <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between mb-6 px-0">
         <div>
             <h1 class="text-2xl font-bold tracking-tight">Edit Kuliner</h1>
@@ -12,7 +13,7 @@
                 <i class="bi-eye"></i>
                 Lihat
             </a>
-            <a href="{{ route('admin.culinaries.index') }}" class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 hover:border-primary">
+            <a href="{{ route('admin.culinaries.index', array_filter(['type' => $backType])) }}" class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 hover:border-primary">
                 <i class="bi-arrow-left"></i>
                 Kembali
             </a>
@@ -41,6 +42,14 @@
                     <div class="flex flex-col sm:flex-row gap-2">
                         <input name="slug" value="{{ old('slug', $culinary->slug) }}" class="flex-1 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all">
                     </div>
+                </div>
+                <div class="sm:col-span-1">
+                    <label class="text-sm font-semibold text-slate-700 mb-2 block">Jenis Kuliner</label>
+                    <select name="type" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all">
+                        @foreach($culinaryTypes as $key => $label)
+                            <option value="{{ $key }}" @selected(old('type', $culinary->type ?? 'khas') === $key)>{{ $label }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="sm:col-span-1">
                     <label class="text-sm font-semibold text-slate-700 mb-2 block">Zona</label>
